@@ -52,22 +52,24 @@ namespace Bangazon
                     case "2":
 
                         Customer.GetCustomers();
-                        // Customer.ListCustomers();
                         PaymentOption.CreatePaymentOption();
-
 
                         break;
                     case "3":
-                        Console.WriteLine("You chose: order a product.");
+
+                        Product.GetProducts();
+                        Product.ListProducts();
+
                         break;
                     case "4":
+
                         Console.WriteLine("You chose: complete an order.");
+
                         break;
                     case "5":
                         Console.WriteLine("See product availability.");
                         break;
                     case "6":
-
                         Console.WriteLine("Are you sure you want to leave Bangazon?");
                         isRunning = false;
                         break;

@@ -40,7 +40,7 @@ namespace Bangazon
 
         public static List<Customer> GetCustomers()
         {
-            //The SQL Connection to my Invoices Database.
+            //The SQL Connection to my Invoices Database - GETTING DATA FROM TABLE
             SqlConnection sqlConnection = new SqlConnection();
             ConnectionString connectionString = new ConnectionString();
             var dataSource = connectionString.source;
@@ -74,7 +74,7 @@ namespace Bangazon
             }
             sqlConnection.Close();
 
-            return CustomerList;
+            return CustomerList; // returns list of customers from database
 
         }
 
@@ -84,13 +84,13 @@ namespace Bangazon
             List<Customer> CustomerList = GetCustomers();
             for (int i=0; i< CustomerList.Count; i++)
             {
-                Console.WriteLine(
+                Console.WriteLine( // prints all customers from db to console
                     (i + 1) + ". " +
                     CustomerList[i].FirstName + " " +
                     CustomerList[i].LastName);
             }
 
-            string chosenCustomer = Console.ReadLine();
+            string chosenCustomer = Console.ReadLine(); // user chooses customer
             int chosenCustomerId = int.Parse(chosenCustomer);
             if (chosenCustomerId >= 0 && chosenCustomerId <= CustomerList.Count)
             {
@@ -99,7 +99,7 @@ namespace Bangazon
 
             Console.WriteLine("You chose " + customer.FirstName + ".");
 
-            return customer;
+            return customer; // returns chosen customer
             
         }
 
