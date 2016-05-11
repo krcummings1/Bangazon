@@ -62,11 +62,9 @@ namespace Bangazon
                        
                         break;
                     case "4":
-                        CustomerOrder.ListPaymentOptions(customer);
-                        CustomerOrder.SelectPaymentOption();
 
-                        //CustomerOrder.CreateOrderWithAllData(paymentOption, customer);
-                       // CustomerOrder.CompleteOrder();
+                        CustomerOrder.CompleteOrder();
+                        //paymentOption.ListByCustomer(customer);
                         
 
                         break;
@@ -81,7 +79,7 @@ namespace Bangazon
 
 
 
-
+                // send data to OrderProducts table after order is complete
 
                // Console.ReadLine();
             }

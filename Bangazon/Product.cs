@@ -16,6 +16,7 @@ namespace Bangazon
         public int IdProductType { get; set; }
         public int Quantity { get; set; }
 
+        public static List<Product> Cart = new List<Product>();
 
         public static List<Product> GetProducts()
         {
@@ -54,7 +55,6 @@ namespace Bangazon
 
         }
 
-        //List<Product> CustomersOrder = new List<Product>();
 
         public static void ListProducts()
         {
@@ -88,16 +88,13 @@ namespace Bangazon
                     Console.Clear();
                 }
 
-                List<Product> CustomersOrder = new List<Product>();
-                CustomersOrder.Add(product);
-                i = 0; 
+                Cart.Add(product);
+                i = 0;
                 // when code gets to this point, i = 4 because of for loop
                 // we have to set it back to 0 in order for it to be < the # of items in the ProductList (ProductList.Count)
 
-
-
-
             }
+               
 
         }
         

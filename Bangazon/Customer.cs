@@ -78,7 +78,7 @@ namespace Bangazon
 
         }
 
-        public static Customer ListCustomers()
+        public Customer ListCustomers()
         {
             Customer customer = null;
             List<Customer> CustomerList = GetCustomers();

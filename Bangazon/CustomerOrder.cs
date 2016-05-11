@@ -16,80 +16,25 @@ namespace Bangazon
         public int IdPaymentOption { get; set; }
         public string Shipping { get; set; }
 
-       // List<PaymentOption> PaymentOptionList = new List<PaymentOption>();
-
-        public static List<PaymentOption> ListPaymentOptions(Customer customer)
+        public static void CompleteOrder()
         {
-            // SELECT IdPaymentOption FROM PaymentOption WHERE customer.IdCustomer = paymentOption.IdCustomer 
-
-            Customer currentCustomer = Customer.ListCustomers();
-            PaymentOption currentPaymentOption = new PaymentOption();
-
-            currentCustomer.IdCustomer = currentPaymentOption.IdCustomer;
-
-            SqlConnection sqlConnection = new SqlConnection();
-            ConnectionString connectionString = new ConnectionString();
-            var dataSource = connectionString.source;
-            sqlConnection.ConnectionString = dataSource;
-
-            List<PaymentOption> PaymentOptionList = new List<PaymentOption>();
-
-            SqlCommand cmd = new SqlCommand();
-            cmd.CommandType = System.Data.CommandType.Text;
-            cmd.CommandText = "SELECT IdPaymentOption, IdCustomer, Name, AccountNumber FROM PaymentOption WHERE currentCustomer.IdCustomer = paymentOption.IdCustomer";
-            cmd.Connection = sqlConnection;
-
-            sqlConnection.Open();
-
-            using (SqlDataReader dataReader = cmd.ExecuteReader())
+            if (Product.Cart.Count < 1)
             {
-                while (dataReader.Read())
+                Console.WriteLine("Please add a product to your order.");
+                Product.ListProducts();
+            }
+            else
+            {
+                float orderTotal = 0;
+                CustomerOrder currentOrder = new CustomerOrder();
+                foreach (Product prod in Product.Cart)
                 {
-                   // CustomerOrder customerOrder = new CustomerOrder();
-                    currentPaymentOption.IdPaymentOption = dataReader.GetInt32(0);
-                    currentPaymentOption.IdCustomer = dataReader.GetInt32(1);
-                    currentPaymentOption.Name = dataReader.GetString(2);
-                    currentPaymentOption.AccountNumber = dataReader.GetString(3);
-
-                    PaymentOptionList.Add(currentPaymentOption);
+                    orderTotal += prod.Price;
                 }
+                Console.WriteLine("Your order total is ${0}. Ready to purchase", orderTotal);
+                Console.Write("(Y/N) >");
             }
-            sqlConnection.Close();
-            
-            return PaymentOptionList; // returns list of customers' payment options from database
-
         }
-
-
-        public static PaymentOption SelectPaymentOption()
-        {
-            Console.WriteLine("Select payment option.");
-
-            PaymentOption customersPaymentOption = null;
-            //List<PaymentOption> PaymentOptionList = 
-            for(int i = 0; i < PaymentOptionList.Count; i++)
-            {
-                Console.WriteLine(
-                    (i + 1) + ". " +
-                    PaymentOptionList[1].Name);
-            }
-
-            string chosenPaymentOption = Console.ReadLine();
-            int chosenPaymentOptionId = int.Parse(chosenPaymentOption);
-            if (chosenPaymentOptionId >= 0 && chosenPaymentOptionId <= PaymentOptionList.Count)
-            {
-                customersPaymentOption = PaymentOptionList[chosenPaymentOptionId - 1];
-            }
-
-            Console.WriteLine("You chose " + customersPaymentOption.Name + ".");
-
-            return customersPaymentOption;
-        }
-
-
-
-
-
 
 
         //public static void CreateOrderWithAllData(PaymentOption paymentOption, Customer customer)
@@ -144,9 +89,9 @@ namespace Bangazon
         //    {
         //        // Console.WriteLine("Your order total is {0}. Ready to purchase? (Y/N)", orderTotal);
         //        float orderTotal = 0;
-                
-            
-              
+
+
+
         //    }
 
 
