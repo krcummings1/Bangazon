@@ -54,59 +54,53 @@ namespace Bangazon
 
         }
 
+        //List<Product> CustomersOrder = new List<Product>();
 
-
-        public static Product ListProducts()
+        public static void ListProducts()
         {
-            Product product = null;
-            List<Product> ProductList = GetProducts();
-            for (int i = 0; i < ProductList.Count; i++)
+            bool stillOrdering = true;
+            int i = 0;
+
+            while (stillOrdering)
             {
-                Console.WriteLine(
-                    (i + 1) + ". " +
-                    ProductList[i].Name + ": " +
-                    ProductList[i].Description + " " + "$" +
-                    ProductList[i].Price);
-            }
+                Product product = null;
+                List<Product> ProductList = GetProducts();
+                for (; i < ProductList.Count; i++)
+                {
+                    Console.WriteLine(
+                        (i + 1) + ". " +
+                        ProductList[i].Name + ": " +
+                        ProductList[i].Description + " " + "$" +
+                        ProductList[i].Price);
+                }
+                Console.WriteLine((i + 1) + ". Return to Main Menu.");
 
-            string chosenProduct = Console.ReadLine();
-            int chosenProductId = int.Parse(chosenProduct);
-            if (chosenProductId >= 0 && chosenProductId <= ProductList.Count)
-            {
-                product = ProductList[chosenProductId - 1];
-            }
+                string chosenProduct = Console.ReadLine(); // user chooses product
+                int chosenProductId = int.Parse(chosenProduct);
+                if (chosenProductId > 0 && chosenProductId <= ProductList.Count)
+                {
+                    product = ProductList[chosenProductId - 1]; // [chosenProductId - 1] is giving us the index of the chosen product within the ProductList 
+                    Console.WriteLine("You chose " + product.Name + "."); // because the index starts at 0 but we added 1 to be printed on the console
+                }                                               
+                else if (chosenProductId == ProductList.Count + 1)
+                {
+                    stillOrdering = false;
+                    Console.Clear();
+                }
 
-            Console.WriteLine("You chose " + product.Name + ". Pick another item or return to the main menu.");
+                List<Product> CustomersOrder = new List<Product>();
+                CustomersOrder.Add(product);
+                i = 0; 
+                // when code gets to this point, i = 4 because of for loop
+                // we have to set it back to 0 in order for it to be < the # of items in the ProductList (ProductList.Count)
 
-            return product; // returns product chosen by user
 
 
 
-            List<Product> CustomersOrder = new List<Product>();
-            CustomersOrder.Add(product);
-            for (int i = 0; i < CustomersOrder.Count; i++)
-            {
-                Console.WriteLine( // prints all customers from db to console
-                    (i + 1) + ". " +
-                    CustomersOrder[i].Name);
             }
 
         }
-
-
-        //public static List<Product> CustomersOrder()
-        //{
-
-        //    List<Product> CustomersOrder = ListProducts();
-
-        //    Product product = ListProducts();
-
-        //    return CustomersOrder;
-        //}
-
-
-
-
+        
 
     }
 }

@@ -15,7 +15,7 @@ namespace Bangazon
 
             Bangazon Bangazon = new Bangazon();
             Customer customer = new Customer();
-            //PaymentOption PaymentOption = new PaymentOption();
+            PaymentOption paymentOption = new PaymentOption();
 
             while (isRunning)
             {
@@ -59,11 +59,15 @@ namespace Bangazon
 
                         Product.GetProducts();
                         Product.ListProducts();
-
+                       
                         break;
                     case "4":
+                        CustomerOrder.ListPaymentOptions(customer);
+                        CustomerOrder.SelectPaymentOption();
 
-                        Console.WriteLine("You chose: complete an order.");
+                        //CustomerOrder.CreateOrderWithAllData(paymentOption, customer);
+                       // CustomerOrder.CompleteOrder();
+                        
 
                         break;
                     case "5":

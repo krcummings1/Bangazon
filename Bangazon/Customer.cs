@@ -82,7 +82,7 @@ namespace Bangazon
         {
             Customer customer = null;
             List<Customer> CustomerList = GetCustomers();
-            for (int i=0; i< CustomerList.Count; i++)
+            for (int i = 0; i< CustomerList.Count; i++)
             {
                 Console.WriteLine( // prints all customers from db to console
                     (i + 1) + ". " +

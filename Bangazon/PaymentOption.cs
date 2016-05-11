@@ -15,7 +15,7 @@ namespace Bangazon
         public string AccountNumber { get; set; }
 
 
-        public static void CreatePaymentOption()
+        public static PaymentOption CreatePaymentOption()
         {
             Console.WriteLine("Which customer?");
            
@@ -31,7 +31,8 @@ namespace Bangazon
             Console.WriteLine("Enter account number ");
             paymentOption.AccountNumber = Console.ReadLine();
 
-            string command = @"
+            // sending data to PaymentOption table
+            string command = @" 
                     INSERT INTO PaymentOption
                         (IdCustomer, Name, AccountNumber)
                     VALUES
@@ -49,7 +50,51 @@ namespace Bangazon
             cmd.ExecuteNonQuery();
             sqlConnection1.Close();
 
+
+            return paymentOption; // chosen payment option
+
         }
+
+        //public static PaymentOption GetIdPaymentOption(PaymentOption paymentOption, Customer customer)
+        //{
+        //    //currentCustomer = ListCustomers();
+        //    paymentOption = CreatePaymentOption();
+        //    paymentOption.IdCustomer = customer.IdCustomer;
+
+
+        //    //The SQL Connection to my Invoices Database - GETTING DATA FROM TABLE
+        //    SqlConnection sqlConnection = new SqlConnection();
+        //    ConnectionString connectionString = new ConnectionString();
+        //    var dataSource = connectionString.source;
+        //    sqlConnection.ConnectionString = dataSource;
+
+        //    SqlCommand cmd = new SqlCommand();
+        //    cmd.CommandType = System.Data.CommandType.Text;
+        //    cmd.CommandText = "SELECT IdPaymentOption, IdCustomer, Name, Account Number FROM PaymentOption";
+        //    cmd.Connection = sqlConnection;
+
+        //    sqlConnection.Open();
+
+        //    using (SqlDataReader dataReader = cmd.ExecuteReader())
+        //    {
+        //        while (dataReader.Read())
+        //        {
+        //            paymentOption.IdPaymentOption = dataReader.GetInt32(0);
+        //            paymentOption.IdCustomer = dataReader.GetInt32(1);
+        //            paymentOption.Name = dataReader.GetString(2);
+        //            paymentOption.AccountNumber = dataReader.GetString(3);
+
+        //        }
+        //    }
+        //    sqlConnection.Close();
+
+        //    return paymentOption; // returns paymentOption from table
+
+
+
+
+        //}
+
 
 
     }
