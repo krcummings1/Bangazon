@@ -60,6 +60,8 @@ namespace Bangazon
         {
             bool stillOrdering = true;
             int i = 0;
+            Product prod = new Product();
+           // double doublePrice = System.Convert.ToDouble(prod.Price);
 
             while (stillOrdering)
             {
@@ -81,21 +83,17 @@ namespace Bangazon
                 {
                     product = ProductList[chosenProductId - 1]; // [chosenProductId - 1] is giving us the index of the chosen product within the ProductList 
                     Console.WriteLine("You chose " + product.Name + "."); // because the index starts at 0 but we added 1 to be printed on the console
+                    Cart.Add(product);
                 }                                               
                 else if (chosenProductId == ProductList.Count + 1)
                 {
                     stillOrdering = false;
                     Console.Clear();
-                }
-
-                Cart.Add(product);
+                }               
                 i = 0;
                 // when code gets to this point, i = 4 because of for loop
                 // we have to set it back to 0 in order for it to be < the # of items in the ProductList (ProductList.Count)
-
-            }
-               
-
+            }   
         }
         
 

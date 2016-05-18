@@ -21,32 +21,13 @@ namespace Bangazon
             {
 
                 Bangazon.MainMenu();
-                //ConsoleKeyInfo info = Console.ReadKey();
                 string str = Console.ReadLine();
 
                 switch (str)
                 {
                     case "1":
-                        Console.WriteLine("You chose: create an account.");
+
                         customer.CreateCustomer();
-
-                        string command = @"
-                    INSERT INTO Customer
-                        (FirstName, LastName, StreetAddress, City, State, PostalCode, PhoneNumber)
-                    VALUES
-                        ('" + customer.FirstName + "', '" + customer.LastName + "', '" + customer.StreetAddress + "', '" + customer.City + "', '" + customer.State + "', '" + customer.PostalCode + "', '" + customer.PhoneNumber + "')";
-
-                        System.Data.SqlClient.SqlConnection sqlConnection1 =
-                        new System.Data.SqlClient.SqlConnection("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"c:\\users\\kaylee cummings\\documents\\visual studio 2015\\Projects\\Bangazon\\Bangazon\\Invoices.mdf\";Integrated Security=True");
-
-                        System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand();
-                        cmd.CommandType = System.Data.CommandType.Text;
-                        cmd.CommandText = command;
-                        cmd.Connection = sqlConnection1;
-
-                        sqlConnection1.Open();
-                        cmd.ExecuteNonQuery();
-                        sqlConnection1.Close();
 
                         break;
                     case "2":
@@ -64,8 +45,6 @@ namespace Bangazon
                     case "4":
 
                         CustomerOrder.CompleteOrder();
-                        //paymentOption.ListByCustomer(customer);
-                        
 
                         break;
                     case "5":
@@ -73,8 +52,18 @@ namespace Bangazon
                         break;
                     case "6":
                         Console.WriteLine("Are you sure you want to leave Bangazon?");
-                        isRunning = false;
-                        break;
+                        Console.WriteLine("(Y/N)");
+                        string value = Console.ReadLine();
+                        if (value == "N" || value == "n")
+                        {
+                            Console.Clear();
+                            break;
+                        }
+                        else
+                        {
+                            isRunning = false;
+                            break;
+                        }
                 }
 
 

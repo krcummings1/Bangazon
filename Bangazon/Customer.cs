@@ -21,21 +21,42 @@ namespace Bangazon
 
         public void CreateCustomer()
         {
+            Customer customer = new Customer();
+
             Console.WriteLine("Type first and last name then press enter.");
             string[] fullName = Console.ReadLine().Split(' ');
-            FirstName = fullName[0];
-            LastName = fullName[1];
-            Console.WriteLine("You entered " + FirstName + " " + LastName + ". Enter street address");
-            StreetAddress = Console.ReadLine();
+            customer.FirstName = fullName[0];
+            customer.LastName = fullName[1];
+            Console.WriteLine("You entered " + customer.FirstName + " " + customer.LastName + ". Enter street address");
+            customer.StreetAddress = Console.ReadLine();
             Console.WriteLine("Enter city");
-            City = Console.ReadLine();
+            customer.City = Console.ReadLine();
             Console.WriteLine("Enter state abbreviation");
-            State = Console.ReadLine();
+            customer.State = Console.ReadLine();
             Console.WriteLine("Enter postal code");
-            PostalCode = Console.ReadLine();
+            customer.PostalCode = Console.ReadLine();
             Console.WriteLine("Enter phone number with no dashes");
-            PhoneNumber = Console.ReadLine();
+            customer.PhoneNumber = Console.ReadLine();
 
+            string command = @"
+                    INSERT INTO Customer
+                        (FirstName, LastName, StreetAddress, City, State, PostalCode, PhoneNumber)
+                    VALUES
+                        ('" + customer.FirstName + "', '" + customer.LastName + "', '" + customer.StreetAddress + "', '" + customer.City + "', '" + customer.State + "', '" + customer.PostalCode + "', '" + customer.PhoneNumber + "')";
+
+            System.Data.SqlClient.SqlConnection sqlConnection1 =
+            new System.Data.SqlClient.SqlConnection("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"c:\\users\\kaylee cummings\\documents\\visual studio 2015\\Projects\\Bangazon\\Bangazon\\Invoices.mdf\";Integrated Security=True");
+
+            System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand();
+            cmd.CommandType = System.Data.CommandType.Text;
+            cmd.CommandText = command;
+            cmd.Connection = sqlConnection1;
+
+            sqlConnection1.Open();
+            cmd.ExecuteNonQuery();
+            sqlConnection1.Close();
+
+            Console.Clear();
         }
 
         public static List<Customer> GetCustomers()

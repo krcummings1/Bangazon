@@ -61,6 +61,7 @@
     <Compile Include="Bangazon.cs" />
     <Compile Include="Customer.cs" />
     <Compile Include="CustomerOrder.cs" />
+    <Compile Include="OrderProducts.cs" />
     <Compile Include="PaymentOption.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="Program.cs" />
